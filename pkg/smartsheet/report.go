@@ -17,6 +17,6 @@
 package smartsheet
 
 type Scope struct {
-	sheets     []Sheet     // Array of Sheet objects (containing just the sheet ID) of any sheets that the requestor has access to that make up the report
-	workspaces []Workspace // Array of Workspace objects (containing just the workspace ID) that the requestor has access to that make up the report
+	Sheets     []Sheet     `json:"sheets"`     // Array of Sheet objects (containing just the sheet ID) of any sheets that the requestor has access to that make up the report
+	Workspaces []Workspace `json:"workspaces"` // Array of Workspace objects (containing just the workspace ID) that the requestor has access to that make up the report
 }

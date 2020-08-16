@@ -19,16 +19,16 @@ package smartsheet
 import "time"
 
 type Discussion struct {
-	id                 int          // Discussion Id
-	parentId           int          // Id of the directly associated row or sheet: present only when the direct association is not clear (see List Discussions)
-	parentType         string       // SHEET or ROW: present only when the direct association is not clear (see List Discussions)
-	accessLevel        string       // User's permissions on the discussion
-	commentAttachments []Attachment // Array of Attachment objects
-	commentCount       int          // The number of comments in the discussion
-	comments           []Comment    // Array of Comment objects
-	createdBy          User         // User object containing name and email of the creator of the discussion
-	lastCommentedAt    time.Time    // Time of most recent comment
-	lastCommentedUser  User         // User object containing name and email of the author of the most recent comment
-	readOnly           bool         // Indicates whether the user can modify the discussion
-	title              string       // Read Only. Discussion title automatically created by duplicating the first 100 characters of the top-level comment
+	Id                 int          // Discussion Id
+	ParentId           int          // Id of the directly associated row or sheet: present only when the direct association is not clear (see List Discussions)
+	ParentType         string       // SHEET or ROW: present only when the direct association is not clear (see List Discussions)
+	AccessLevel        string       // User's permissions on the discussion
+	CommentAttachments []Attachment // Array of Attachment objects
+	CommentCount       int          // The number of comments in the discussion
+	Comments           []Comment    // Array of Comment objects
+	CreatedBy          User         // User object containing name and email of the creator of the discussion
+	LastCommentedAt    time.Time    // Time of most recent comment
+	LastCommentedUser  User         // User object containing name and email of the author of the most recent comment
+	ReadOnly           bool         // Indicates whether the user can modify the discussion
+	Title              string       // Read Only. Discussion title automatically created by duplicating the first 100 characters of the top-level comment
 }

@@ -88,59 +88,59 @@ func (c Client) GetSheet(id string) (*Sheet, error) {
 }
 
 type SheetUserSettings struct {
-	criticalPathEnabled bool // Does this user have "Show Critical Path" turned on for this sheet? NOTE: This setting only has an effect on project sheets with dependencies enabled.
-	displaySummaryTasks bool // Does this user have "Display Summary Tasks" turned on for this sheet? Applies only to sheets where "Calendar View" has been configured.
+	CriticalPathEnabled bool // Does this user have "Show Critical Path" turned on for this sheet? NOTE: This setting only has an effect on project sheets with dependencies enabled.
+	DisplaySummaryTasks bool // Does this user have "Display Summary Tasks" turned on for this sheet? Applies only to sheets where "Calendar View" has been configured.
 }
 
 type SheetUserPermissions struct {
-	summaryPermissions string
+	SummaryPermissions string
 }
 
 type SheetSummary struct {
-	fields []SummaryField // Array of summary (or metadata) fields defined on the sheet.
+	Fields []SummaryField // Array of summary (or metadata) fields defined on the sheet.
 }
 
 type SummaryField struct {
-	id             int             // SummaryField Id
-	contactOptions []ContactOption // Array of ContactOption objects to specify a pre-defined list of values for the column. Column type must be CONTACT_LIST
-	createdAt      time.Time       // Time of Bcreation
-	createdBy      User            // User object containing name and email of the summaryField's author
-	displayValue   string          // Visual representation of cell contents, as presented to the user in the UI. See Cell Reference.
-	format         string          // The format descriptor (see Formatting). Only returned if the include query string parameter contains format and this column has a non-default format applied to it.
-	formula        string          // The formula for a cell, if set. NOTE: calculation errors or problems with a formula do not cause the API call to return an error code. Instead, the response contains the same value as in the UI, such as field.value = "#CIRCULAR REFERENCE".
-	hyperlink      Hyperlink       // A hyperlink to a URL, sheet, or report
-	image          Image           // The image that the field contains. Only returned if the field contains an image.
-	index          int             // Field index or position. This int is zero-based.
-	locked         bool            // Indicates whether the field is locked. In a response, a value of true indicates that the field has been locked by the sheet owner or the admin.
-	lockedForUser  bool            // Indicates whether the field is locked for the requesting user. This attribute may be present in a response, but cannot be specified in a request.
-	modifiedAt     time.Time       // Time of last modification
-	modifiedBy     User            // User object containing name and email of the summaryField's author
-	objectValue    ObjectValue     // Required for date and contact fields
-	options        []string        // When applicable for PICKLIST column type. Array of the options available for the field
-	symbol         string          // When applicable for PICKLIST column type. See Symbol Columns.
-	title          string          // Arbitrary name, must be unique within summary
-	_type          string          // One of:
-	validation     bool            // Indicates whether summary field values are restricted to the type
+	Id             int             `json:"id"`             // SummaryField Id
+	ContactOptions []ContactOption `json:"contactOptions"` // Array of ContactOption objects to specify a pre-defined list of values for the column. Column type must be CONTACT_LIST
+	CreatedAt      time.Time       `json:"createdAt"`      // Time of Bcreation
+	CreatedBy      User            `json:"createdBy"`      // User object containing name and email of the summaryField's author
+	DisplayValue   string          `json:"displayValue"`   // Visual representation of cell contents, as presented to the user in the UI. See Cell Reference.
+	Format         string          `json:"format"`         // The format descriptor (see Formatting). Only returned if the include query string parameter contains format and this column has a non-default format applied to it.
+	Formula        string          `json:"formula"`        // The formula for a cell, if set. NOTE: calculation errors or problems with a formula do not cause the API call to return an error code. Instead, the response contains the same value as in the UI, such as field.value = "#CIRCULAR REFERENCE".
+	Hyperlink      Hyperlink       `json:"hyperlink"`      // A hyperlink to a URL, sheet, or report
+	Image          Image           `json:"image"`          // The image that the field contains. Only returned if the field contains an image.
+	Index          int             `json:"index"`          // Field index or position. This int is zero-based.
+	Locked         bool            `json:"locked"`         // Indicates whether the field is locked. In a response, a value of true indicates that the field has been locked by the sheet owner or the admin.
+	LockedForUser  bool            `json:"lockedForUser"`  // Indicates whether the field is locked for the requesting user. This attribute may be present in a response, but cannot be specified in a request.
+	ModifiedAt     time.Time       `json:"modifiedAt"`     // Time of last modification
+	ModifiedBy     User            `json:"modifiedBy"`     // User object containing name and email of the summaryField's author
+	ObjectValue    ObjectValue     `json:"objectValue"`    // Required for date and contact fields
+	Options        []string        `json:"options"`        // When applicable for PICKLIST column type. Array of the options available for the field
+	Symbol         string          `json:"symbol"`         // When applicable for PICKLIST column type. See Symbol Columns.
+	Title          string          `json:"title"`          // Arbitrary name, must be unique within summary
+	Type           string          `json:"type"`           // One of:
+	Validation     bool            `json:"validation"`     // Indicates whether summary field values are restricted to the type
 }
 
 type Source struct {
-	id    int    // Id of the report, sheet, Sight (aka dashboard), or template from which the enclosing report, sheet, Sight, or template was created
-	_type string // report, sheet, sight, or template
+	Id   int    `json:"id"`   // Id of the report, sheet, Sight (aka dashboard), or template from which the enclosing report, sheet, Sight, or template was created
+	Type string `json:"type"` // report, sheet, sight, or template
 }
 
 type ProjectSettings struct {
-	lengthOfDay    int         // Length of a workday for a project sheet. Valid value must be above or equal to 1 hour, and less than or equal to 24 hours.
-	nonWorkingDays []time.Time // Non-working days for a project sheet. The format for the timestamp array must be an array of strings that are valid ISO-8601 dates ('YYYY-MM-DD').
-	workingDays    []string    // Working days of a week for a project sheet. Valid values must be an array of strings of days of the week: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, or SUNDAY
+	LengthOfDay    int         `json:"lengthOfDay"`    // Length of a workday for a project sheet. Valid value must be above or equal to 1 hour, and less than or equal to 24 hours.
+	NonWorkingDays []time.Time `json:"nonWorkingDays"` // Non-working days for a project sheet. The format for the timestamp array must be an array of strings that are valid ISO-8601 dates ('YYYY-MM-DD').
+	WorkingDays    []string    `json:"workingDays"`    // Working days of a week for a project sheet. Valid values must be an array of strings of days of the week: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, or SUNDAY
 }
 
 type CrossSheetReference struct {
-	id            int64  // Cross-sheet reference Id, guaranteed unique within referencing sheet.
-	endColumnId   int64  // Defines ending edge of range when specifying one or more columns. To specify an entire column, omit the startRowId and endRowId parameters.
-	endRowId      int64  // Defines ending edge of range when specifying one or more rows. To specify an entire row, omit the startColumnId and endColumnId parameters.
-	sourceSheetId int64  // Sheet Id of source sheet.
-	startColumnId int64  // Defines beginning edge of range when specifying one or more columns. To specify an entire column, omit the startRowId and endRowId parameters.
-	startRowId    int64  // Defines beginning edge of range when specifying one or more rows. To specify an entire row, omit the startColumnId and endColumnId parameters.
-	name          string // Friendly name of reference. Auto-generated unless specified in Create Cross-sheet References.
-	status        string
+	Id            int64  `json:"id"`            // Cross-sheet reference Id, guaranteed unique within referencing sheet.
+	EndColumnId   int64  `json:"endColumnId"`   // Defines ending edge of range when specifying one or more columns. To specify an entire column, omit the startRowId and endRowId parameters.
+	EndRowId      int64  `json:"endRowId"`      // Defines ending edge of range when specifying one or more rows. To specify an entire row, omit the startColumnId and endColumnId parameters.
+	SourceSheetId int64  `json:"sourceSheetId"` // Sheet Id of source sheet.
+	StartColumnId int64  `json:"startColumnId"` // Defines beginning edge of range when specifying one or more columns. To specify an entire column, omit the startRowId and endRowId parameters.
+	StartRowId    int64  `json:"startRowId"`    // Defines beginning edge of range when specifying one or more rows. To specify an entire row, omit the startColumnId and endColumnId parameters.
+	Name          string `json:"name"`          // Friendly name of reference. Auto-generated unless specified in Create Cross-sheet References.
+	Status        string `json:""`
 }
