@@ -64,7 +64,6 @@ type BulkItemFailure struct {
 type ClientOptions struct {
 	endpoint string
 	token    string
-	client   http.Client
 }
 
 func NewSmartsheetClient(options *ClientOptions) *Client {
