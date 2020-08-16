@@ -1,0 +1,26 @@
+name: golangci-lint
+on:
+  pull_request:
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: [ '1.15', '1.14', '1.13', '1.12']
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v1
+      - name: test
+        with:
+          go-version: ${{ matrix.go }}
+      - run: go test ./pkg/smartsheet
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: lint
+        uses: golangci/golangci-lint-action@v1
+        with:
+          version: v1.30
