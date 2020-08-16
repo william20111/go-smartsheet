@@ -11,10 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v1
-      - name: test
         with:
           go-version: ${{ matrix.go }}
-      - run: go test ./pkg/smartsheet
+      - name: test
+        run: go test ./pkg/smartsheet
   golangci:
     name: lint
     runs-on: ubuntu-latest

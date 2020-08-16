@@ -64,5 +64,5 @@ type Image struct {
 }
 
 type ObjectValue struct {
-	objectType string
+	ObjectType string
 }

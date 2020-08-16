@@ -19,16 +19,16 @@ package smartsheet
 import "time"
 
 type Attachment struct {
-	id                 int       // Attachment Id
-	parentId           int       // The Id of the parent
-	attachmentType     string    // Attachment type (one of BOX_COM, DROPBOX*, EGNYTE*, EVERNOTE*, FILE, GOOGLE_DRIVE, LINK, or ONEDRIVE) *Not supported for all account types, see below.
-	attachmentSubType  string    // Attachment sub type, valid only for the following:
-	mimeType           string    // Attachment MIME type (PNG, etc.)
-	parentType         string    // The type of object the attachment belongs to (one of COMMENT, ROW, or SHEET)
-	createdAt          time.Time // A timestamp of when the attachment was originally added
-	createdBy          User      // User object containing name and email of the creator of this attachment
-	name               string    // Attachment name
-	sizeInKb           int       // The size of the file, if the attachmentType is FILE
-	url                string    // Attachment temporary URL (files only)
-	urlExpiresInMillis int       // Attachment temporary URL time to live (files only)
+	Id                 int       // Attachment Id
+	ParentId           int       // The Id of the parent
+	AttachmentType     string    // Attachment type (one of BOX_COM, DROPBOX*, EGNYTE*, EVERNOTE*, FILE, GOOGLE_DRIVE, LINK, or ONEDRIVE) *Not supported for all account types, see below.
+	AttachmentSubType  string    // Attachment sub type, valid only for the following:
+	MimeType           string    // Attachment MIME type (PNG, etc.)
+	ParentType         string    // The type of object the attachment belongs to (one of COMMENT, ROW, or SHEET)
+	CreatedAt          time.Time // A timestamp of when the attachment was originally added
+	CreatedBy          User      // User object containing name and email of the creator of this attachment
+	Name               string    // Attachment name
+	SizeInKb           int       // The size of the file, if the attachmentType is FILE
+	Url                string    // Attachment temporary URL (files only)
+	UrlExpiresInMillis int       // Attachment temporary URL time to live (files only)
 }

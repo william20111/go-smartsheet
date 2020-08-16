@@ -19,11 +19,11 @@ package smartsheet
 import "time"
 
 type Comment struct {
-	id           int          // Comment Id
-	discussionId int          // (optional) 	Discussion Id
-	attachments  []Attachment // Array of Attachment objects
-	createdAt    time.Time    // Time of creation
-	createdBy    User         // User object containing name and email of the comment's author
-	modifiedAt   time.Time    // Time of last modification
-	text         string       // Comment body
+	Id           int          // Comment Id
+	DiscussionId int          // (optional) 	Discussion Id
+	Attachments  []Attachment // Array of Attachment objects
+	CreatedAt    time.Time    // Time of creation
+	CreatedBy    User         // User object containing name and email of the comment's author
+	ModifiedAt   time.Time    // Time of last modification
+	Text         string       // Comment body
 }

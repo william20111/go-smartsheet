@@ -17,16 +17,16 @@
 package smartsheet
 
 type Template struct {
-	id             int      // Template Id
-	_type          string   // Type of the template. One of sheet or report. Only applicable to public templates
-	accessLevel    string   // User's permissions on the template
-	blank          bool     // Indicates whether the template is blank. Only applicable to public templates
-	categories     []string // List of categories this template belongs to. Only applicable to public templates
-	description    string   // Template description
-	globalTemplate string   // Type of global template. One of: BLANK_SHEET, PROJECT_SHEET, or TASK_LIST. Only applicable to blank public templates
-	image          string   // URL to the small preview image for this template. Only applicable to non-blank public templates
-	largeImage     string   // URL to the large preview image for this template. Only applicable to non-blank public templates
-	locale         string   // Locale of the template. Only applicable to public templates
-	name           string   // Template name
-	tags           []string // List of search tags for this template. Only applicable to non-blank public templates
+	Id             int      // Template Id
+	Type           string   // Type of the template. One of sheet or report. Only applicable to public templates
+	AccessLevel    string   // User's permissions on the template
+	Blank          bool     // Indicates whether the template is blank. Only applicable to public templates
+	Categories     []string // List of categories this template belongs to. Only applicable to public templates
+	Description    string   // Template description
+	GlobalTemplate string   // Type of global template. One of: BLANK_SHEET, PROJECT_SHEET, or TASK_LIST. Only applicable to blank public templates
+	Image          string   // URL to the small preview image for this template. Only applicable to non-blank public templates
+	LargeImage     string   // URL to the large preview image for this template. Only applicable to non-blank public templates
+	Locale         string   // Locale of the template. Only applicable to public templates
+	Name           string   // Template name
+	Tags           []string // List of search tags for this template. Only applicable to non-blank public templates
 }

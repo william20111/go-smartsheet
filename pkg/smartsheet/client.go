@@ -47,10 +47,23 @@ type ErrorObject struct {
 	Message   string `json:"message"`
 }
 
+type ResultObject struct {
+	FailedItems []BulkItemFailure `json:"failedItems"` //Array of BulkItemFailure objects which represents the items that failed to be added or updated. See Partial Success for more information. Applicable only for bulk operations that support partial success
+	Message     string            `json:"message"`     // Message that indicates the outcome of the request. (One of SUCCESS or PARTIAL_SUCCESS)
+	ResultCode  int               `json:"resultCode"`  //0 (zero) if successful, 3 for partial success of a bulk operation.
+	Version     int               `json:"version"`     // New version of the Sheet. Applicable only for operations which update sheet data
+	Result      interface{}       `json:"result"`
+}
+
+type BulkItemFailure struct {
+	RowId int         `json:"rowId"` // The id of the Row that failed. Applicable only to bulk row operations
+	Error ErrorObject `json:"error"` // The error caused by the failed item
+	Index int         `json:"index"` // The index of the failed item in the bulk request array
+}
+
 type ClientOptions struct {
 	endpoint string
 	token    string
-	client   http.Client
 }
 
 func NewSmartsheetClient(options *ClientOptions) *Client {
