@@ -87,6 +87,75 @@ func (c Client) GetSheet(id string) (*Sheet, error) {
 	return &sheet, nil
 }
 
+// Return ResultObject object
+func (c Client) DeleteSheet(id string) (*ResultObject, error) {
+	var res ResultObject
+	resp, err := c.delete(fmt.Sprintf("%s/sheets/%s", apiEndpoint, id))
+	if err != nil {
+		return nil, err
+	}
+	if dErr := c.decodeJSON(resp, &res); dErr != nil {
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
+	}
+	return &res, nil
+}
+
+// Return ResultObject object
+func (c Client) UpdateSheet(id string, sheet Sheet) (*ResultObject, error) {
+	var res ResultObject
+	resp, err := c.put(fmt.Sprintf("%s/sheets/%s", apiEndpoint, id), sheet, nil)
+	if err != nil {
+		return nil, err
+	}
+	if dErr := c.decodeJSON(resp, &res); dErr != nil {
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
+	}
+	res.Result = res.Result.(Sheet)
+	return &res, nil
+}
+
+// Return ResultObject object
+func (c Client) CreateSheet(sheet Sheet) (*ResultObject, error) {
+	var res ResultObject
+	resp, err := c.post(fmt.Sprintf("%s/sheets", apiEndpoint), sheet, nil)
+	if err != nil {
+		return nil, err
+	}
+	if dErr := c.decodeJSON(resp, &res); dErr != nil {
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
+	}
+	res.Result = res.Result.(Sheet)
+	return &res, nil
+}
+
+// Return ResultObject object
+func (c Client) CreateSheetInFolder(folderId int, sheet Sheet) (*ResultObject, error) {
+	var res ResultObject
+	resp, err := c.post(fmt.Sprintf("%s/folders/%d/sheets", apiEndpoint, folderId), sheet, nil)
+	if err != nil {
+		return nil, err
+	}
+	if dErr := c.decodeJSON(resp, &res); dErr != nil {
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
+	}
+	res.Result = res.Result.(Sheet)
+	return &res, nil
+}
+
+// Return ResultObject object
+func (c Client) CreateSheetInWorkspace(workspaceId int, sheet Sheet) (*ResultObject, error) {
+	var res ResultObject
+	resp, err := c.post(fmt.Sprintf("%s/workspaces/%d/sheets", apiEndpoint, workspaceId), sheet, nil)
+	if err != nil {
+		return nil, err
+	}
+	if dErr := c.decodeJSON(resp, &res); dErr != nil {
+		return nil, fmt.Errorf("could not decode JSON response: %v", dErr)
+	}
+	res.Result = res.Result.(Sheet)
+	return &res, nil
+}
+
 type SheetUserSettings struct {
 	CriticalPathEnabled bool // Does this user have "Show Critical Path" turned on for this sheet? NOTE: This setting only has an effect on project sheets with dependencies enabled.
 	DisplaySummaryTasks bool // Does this user have "Display Summary Tasks" turned on for this sheet? Applies only to sheets where "Calendar View" has been configured.
