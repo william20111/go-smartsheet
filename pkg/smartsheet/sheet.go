@@ -22,9 +22,9 @@ import (
 )
 
 type Sheet struct {
-	Id                         int                   `json:"id"`                         //Sheet Id
-	FromId                     int                   `json:"fromId"`                     // The Id of the template from which to create the sheet. This attribute can be specified in a request, but is never present in a response.
-	OwnerId                    int                   `json:"ownerId"`                    // User Id of the sheet owner
+	Id                         int64                 `json:"id"`                         //Sheet Id
+	FromId                     int64                 `json:"fromId"`                     // The Id of the template from which to create the sheet. This attribute can be specified in a request, but is never present in a response.
+	OwnerId                    int64                 `json:"ownerId"`                    // User Id of the sheet owner
 	AccessLevel                string                `json:"accessLevel"`                //User's permissions on the sheet
 	Attachments                []Attachment          `json:"attachments"`                //Array of Attachment objects. Only returned if the include query string parameter contains Attachments.
 	Columns                    []Column              `json:"columns"`                    // Array of Column objects
@@ -65,7 +65,7 @@ func (s Sheet) GetColumnByName(name string) (*Column, error) {
 }
 
 // Return Column object with id
-func (s Sheet) GetColumnById(id int) (*Column, error) {
+func (s Sheet) GetColumnById(id int64) (*Column, error) {
 	for i := range s.Columns {
 		if s.Columns[i].Id == id {
 			return &s.Columns[i], nil
@@ -170,7 +170,7 @@ type SheetSummary struct {
 }
 
 type SummaryField struct {
-	Id             int             `json:"id"`             // SummaryField Id
+	Id             int64           `json:"id"`             // SummaryField Id
 	ContactOptions []ContactOption `json:"contactOptions"` // Array of ContactOption objects to specify a pre-defined list of values for the column. Column type must be CONTACT_LIST
 	CreatedAt      time.Time       `json:"createdAt"`      // Time of Bcreation
 	CreatedBy      User            `json:"createdBy"`      // User object containing name and email of the summaryField's author
@@ -179,7 +179,7 @@ type SummaryField struct {
 	Formula        string          `json:"formula"`        // The formula for a cell, if set. NOTE: calculation errors or problems with a formula do not cause the API call to return an error code. Instead, the response contains the same value as in the UI, such as field.value = "#CIRCULAR REFERENCE".
 	Hyperlink      Hyperlink       `json:"hyperlink"`      // A hyperlink to a URL, sheet, or report
 	Image          Image           `json:"image"`          // The image that the field contains. Only returned if the field contains an image.
-	Index          int             `json:"index"`          // Field index or position. This int is zero-based.
+	Index          int64           `json:"index"`          // Field index or position. This int is zero-based.
 	Locked         bool            `json:"locked"`         // Indicates whether the field is locked. In a response, a value of true indicates that the field has been locked by the sheet owner or the admin.
 	LockedForUser  bool            `json:"lockedForUser"`  // Indicates whether the field is locked for the requesting user. This attribute may be present in a response, but cannot be specified in a request.
 	ModifiedAt     time.Time       `json:"modifiedAt"`     // Time of last modification
@@ -193,12 +193,12 @@ type SummaryField struct {
 }
 
 type Source struct {
-	Id   int    `json:"id"`   // Id of the report, sheet, Sight (aka dashboard), or template from which the enclosing report, sheet, Sight, or template was created
+	Id   int64  `json:"id"`   // Id of the report, sheet, Sight (aka dashboard), or template from which the enclosing report, sheet, Sight, or template was created
 	Type string `json:"type"` // report, sheet, sight, or template
 }
 
 type ProjectSettings struct {
-	LengthOfDay    int         `json:"lengthOfDay"`    // Length of a workday for a project sheet. Valid value must be above or equal to 1 hour, and less than or equal to 24 hours.
+	LengthOfDay    int64       `json:"lengthOfDay"`    // Length of a workday for a project sheet. Valid value must be above or equal to 1 hour, and less than or equal to 24 hours.
 	NonWorkingDays []time.Time `json:"nonWorkingDays"` // Non-working days for a project sheet. The format for the timestamp array must be an array of strings that are valid ISO-8601 dates ('YYYY-MM-DD').
 	WorkingDays    []string    `json:"workingDays"`    // Working days of a week for a project sheet. Valid values must be an array of strings of days of the week: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, or SUNDAY
 }

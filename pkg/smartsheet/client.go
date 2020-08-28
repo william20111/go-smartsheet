@@ -42,7 +42,7 @@ type Client struct {
 }
 
 type ErrorObject struct {
-	ErrorCode string `json:"errorCode"`
+	ErrorCode int    `json:"errorCode"`
 	RefId     string `json:"refId"`
 	Message   string `json:"message"`
 }
@@ -131,7 +131,7 @@ func (c *Client) checkResponse(resp *http.Response, err error) (*http.Response, 
 	if err != nil {
 		return resp, fmt.Errorf("error calling the API endpoint: %v", err)
 	}
-	if 199 >= resp.StatusCode || 300 <= resp.StatusCode {
+	if 199 >= resp.StatusCode || 300 <= resp.StatusCode || 400 == resp.StatusCode {
 		var eo *ErrorObject
 		var getErr error
 		if eo, getErr = c.getErrorFromResponse(resp); getErr != nil {
