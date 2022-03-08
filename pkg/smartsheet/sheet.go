@@ -198,7 +198,7 @@ type Source struct {
 }
 
 type ProjectSettings struct {
-	LengthOfDay    int64    `json:"lengthOfDay"`    // Length of a workday for a project sheet. Valid value must be above or equal to 1 hour, and less than or equal to 24 hours.
+	LengthOfDay    float64  `json:"lengthOfDay"`    // Length of a workday for a project sheet. Valid value must be above or equal to 1 hour, and less than or equal to 24 hours.
 	NonWorkingDays []string `json:"nonWorkingDays"` // Non-working days for a project sheet. The format for the timestamp array must be an array of strings that are valid ISO-8601 dates ('YYYY-MM-DD').
 	WorkingDays    []string `json:"workingDays"`    // Working days of a week for a project sheet. Valid values must be an array of strings of days of the week: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, or SUNDAY
 }
