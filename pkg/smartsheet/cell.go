@@ -32,7 +32,7 @@ type Cell struct {
 	LinksOutToCells    []CellLink   `json:"linksOutToCells,omitempty"`    //An array of CellLink objects. Zero or more outbound links from this cell to cells in other sheets whose values mirror this cell's value.
 	ObjectValue        *ObjectValue `json:"objectValue,omitempty"`        //Optionally included object representation of the cell's value. Used for updating predecessor cell values or for multi-contact details.
 	OverrideValidation bool         `json:"overrideValidation,omitempty"` //(Admin only) Indicates whether the cell value can contain a value outside of the validation limits (value = true). When using this parameter, you must also set strict to false to bypass value type checking. This property is honored for POST or PUT actions that update rows.
-	Strict             bool         `json:"strict,omitempty"`             //Set to false to enable lenient parsing. Defaults to true. You can specify this attribute in a request, but it is never present in a response. See Cell Value Parsing for more information about using this attribute.
+	Strict             *bool        `json:"strict,omitempty"`             //Set to false to enable lenient parsing. Defaults to true. You can specify this attribute in a request, but it is never present in a response. See Cell Value Parsing for more information about using this attribute.
 	Value              string       `json:"value,omitempty"`              //string number, or Boolean 	A string, a number, or a Boolean value -- depending on the cell type and the data in the cell. Cell values larger than 4000 characters are silently truncated. An empty cell returns no value. See Cell Reference.
 }
 

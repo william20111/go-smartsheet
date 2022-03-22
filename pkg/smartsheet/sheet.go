@@ -28,7 +28,7 @@ type Sheet struct {
 	AccessLevel                string                `json:"accessLevel"`                //User's permissions on the sheet
 	Attachments                []Attachment          `json:"attachments"`                //Array of Attachment objects. Only returned if the include query string parameter contains Attachments.
 	Columns                    []Column              `json:"columns"`                    // Array of Column objects
-	CreatedAt                  time.Time             `json:"createdAt"`                  // Time that the sheet was created
+	CreatedAt                  string                `json:"createdAt"`                  // Time that the sheet was created
 	CrossSheetReferences       []CrossSheetReference `json:"crossSheetReferences"`       // Array of CrossSheetReference objects. Only returned if the include query string parameter contains crossSheetReferences.
 	DependenciesEnabled        bool                  `json:"dependenciesEnabled"`        //	Indicates whether dependencies are enabled
 	Discussions                []Discussion          `json:"discussions"`                // Array of Discussion objects. Only returned if the include query string parameter contains discussions.
@@ -36,7 +36,7 @@ type Sheet struct {
 	Favorite                   bool                  `json:"favorite"`                   // Returned only if the user has marked this sheet as a favorite in their Home tab (value = true)
 	GanttEnabled               bool                  `json:"ganttEnabled"`               //	Indicates whether "Gantt View" is enabled
 	HasSummaryFields           bool                  `json:"hasSummaryFields"`           //	Indicates whether a sheet summary is present
-	ModifiedAt                 time.Time             `json:"modifiedAt"`                 // Time that the sheet was modified
+	ModifiedAt                 string                `json:"modifiedAt"`                 // Time that the sheet was modified
 	Name                       string                `json:"name"`                       // Sheet name
 	Owner                      string                `json:"owner"`                      // Email address of the sheet owner
 	Permalink                  string                `json:"permalink"`                  // URL that represents a direct link to the sheet in Smartsheet
@@ -198,9 +198,9 @@ type Source struct {
 }
 
 type ProjectSettings struct {
-	LengthOfDay    int64       `json:"lengthOfDay"`    // Length of a workday for a project sheet. Valid value must be above or equal to 1 hour, and less than or equal to 24 hours.
-	NonWorkingDays []time.Time `json:"nonWorkingDays"` // Non-working days for a project sheet. The format for the timestamp array must be an array of strings that are valid ISO-8601 dates ('YYYY-MM-DD').
-	WorkingDays    []string    `json:"workingDays"`    // Working days of a week for a project sheet. Valid values must be an array of strings of days of the week: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, or SUNDAY
+	LengthOfDay    float64  `json:"lengthOfDay"`    // Length of a workday for a project sheet. Valid value must be above or equal to 1 hour, and less than or equal to 24 hours.
+	NonWorkingDays []string `json:"nonWorkingDays"` // Non-working days for a project sheet. The format for the timestamp array must be an array of strings that are valid ISO-8601 dates ('YYYY-MM-DD').
+	WorkingDays    []string `json:"workingDays"`    // Working days of a week for a project sheet. Valid values must be an array of strings of days of the week: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, or SUNDAY
 }
 
 type CrossSheetReference struct {
