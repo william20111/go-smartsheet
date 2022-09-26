@@ -149,3 +149,11 @@ func (c *Client) getErrorFromResponse(resp *http.Response) (*ErrorObject, error)
 	}
 	return &result, nil
 }
+
+func (c *ClientOptions) WithToken(t string) {
+	c.token = t
+}
+
+func (c *ClientOptions) WithAPIEndpoint(e string) {
+	c.endpoint = e
+}
